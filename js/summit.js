@@ -158,7 +158,7 @@ $(function () {
 	var summitServer = (useLocal) ? "ws://127.0.0.1:8545" : "wss://ropsten.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	// var summitServer = "wss://mainnet.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	
-	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xb956a698790765D582a049a0c664262D88412Dbe";
+	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xE78D250Db01a402d6e00FBc21F496EF0F5aD5140";
 	// var ethContractAddr = "";
 	
 	var defAcc = "0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f";
