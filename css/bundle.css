@@ -1,0 +1,380 @@
+html, body {
+    font-family: sans-serif;
+}
+
+html.dm {
+    filter: invert(100%);
+}
+
+/*html.dm img,
+html.dm button {
+    filter: invert(100%);
+}*/
+
+* {
+    -webkit-overflow-scrolling: touch;
+    font-family: "Helvetica Neue", "Roboto", Tahoma, sans-serif !important;
+    transition: background-color .1s, color .1s;
+}
+
+#page-faq, #page-account {
+	background: url("../img/background.png") no-repeat;
+	background-size: cover;
+	background-color: white;
+	background-attachment: fixed;
+    background-position: center center;
+	background-color: #efefef;
+}
+body {
+	min-height: 100%;
+	color: #23b993;
+}
+
+button {
+    background: #23b993;
+    border: thin solid #23b993;
+    border-radius: 3px;
+    line-height: 48px;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: white;
+}
+
+.hide {
+	display: none !important;
+}
+
+.container {
+    position: relative;
+    margin: 0px auto;
+}
+
+.centered {
+    text-align: center;
+}
+
+.form {
+	box-sizing: border-box;
+	padding-left: 16px;
+	padding-right: 16px;
+	position: relative;
+	width: 100%;
+	max-width: 630px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 12px;
+}
+
+.form > h3 {
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: black;
+}
+
+.form > input {
+	background: white;
+	border: thin solid #23b993;
+	border-radius: 3px;
+	line-height: 42px;
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 20px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.form > input + button {
+	background: #23b993;
+	position: absolute;
+	right: 16px;
+	bottom: 1px;
+	width: 80px;
+	border: 1px solid #23b993;
+	border-radius: 0px 3px 3px 0px;
+	line-height: 42px;
+	padding: 0px;
+	font-size: 20px;
+	z-index: 1;
+}
+
+.form > .blockBtn {
+	display: block;
+	position: relative;
+	width: 100%;
+	right: 0px;
+	top: -3px;
+	border-radius: 0px 0px 3px 3px;
+}
+
+#loader {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	background-image: url("../img/header-small.png");
+	background-repeat: no-repeat;
+	background-size: 72px auto;
+	background-position: bottom right;
+	text-align: center;
+	z-index: 1000;
+}
+
+#loader img {
+	position: absolute;
+	width: 200px;
+	top: 50%;
+	left: 50%;
+	margin-top: -16px;
+	margin-left: -100px;
+	animation: fading 2s;
+	animation-iteration-count: infinite;
+	opacity: 0.5;
+}
+
+@keyframes fading {
+	0% { opacity: 0.5 }
+	60% { opacity: 1 }
+	75% { opacity: 0.5 }
+	100% { opacity: 0.5 }
+}
+
+#page-header {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 5;
+	background: white;
+	box-shadow: 0px 0px 8px -1px #aaa;
+	text-align: right;
+}
+
+#page-header button:nth-child(1) {
+	float: left;
+}
+#page-header button:nth-child(2) {
+	float: left;
+}
+#page-header button:hover {
+	color: #23b993;
+}
+#page-header button {
+	height: 64px;
+	border: none;
+	display: inline-block;
+	min-width: 100px;
+	margin: 0;
+	padding: 0px 16px;
+	background-color: white;
+	border-radius: 0px;
+}
+
+#page-landing {
+    background: white;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+#page-landing .container {
+    width: 100%;
+    position: absolute;
+    margin-top: -300px;
+    top: 50%;
+}
+
+    .landing-logo {
+        display: block;
+        width: 240px;
+        margin: 0px auto -30px auto;
+    }
+
+    .landing-header {
+        display: block;
+        width: 180px;
+        margin: 0 auto 32px auto;
+    }
+    
+	#faqButton {
+        bottom: 0px;
+        left: 0px;
+        position: fixed;
+	}
+	#faqButtonClose {
+		top: 0px;
+		left: 0px;
+        position: absolute;
+		padding-top: 16px;
+	}
+    #faqButton, #faqButtonClose {
+        display: block;
+        width: 100%;
+        line-height: 48px;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: black;
+        padding-bottom: 32px;
+        cursor: pointer;
+    }
+    #faqButtonClose img {
+		transform: rotate(180deg);
+		margin-top: -32px !important;
+	}
+    #faqButton img, #faqButtonClose img {
+        margin: 0 auto -30px auto;
+        display: block;
+        width: 100px;
+    }
+    
+    #faqButton:hover, #faqButtonClose:hover {
+        background: #ccc;
+    }
+	
+	
+#page-faq {
+	transition: top 1s;
+	position: fixed;
+	top: 100%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0px 0px 32px -12px black;
+}
+
+#page-account {
+	padding-top: calc(64px + 32px);
+	padding-bottom: 64px;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#page-multi .container > div.disabled > table,
+#page-direct .container > div.disabled > table {
+	filter: grayscale(100%);
+}
+
+#page-multi .container > div,
+#page-direct .container > div {
+	display: inline-block;
+	margin: 16px;
+	position: relative;
+}
+#page-multi .container > div > span > button {
+	margin-top: -30px;
+}
+#page-direct .container > div > span > button {
+	margin-top: 1px;
+}
+#page-multi .container > div > span > button,
+#page-direct .container > div > span > button {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	margin-left: -140px;
+	width: 280px;
+}
+
+#page-multi,
+#page-direct {
+	background: white;
+	background-image: url("../img/header-small.png");
+	background-size: 10%;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding: 96px 16px 16px 16px;
+}
+
+	#page-direct .container { }
+	
+	#page-multi h3,
+	#page-multi h5,
+	#page-direct h3,
+	#page-direct h5 {
+		font-weight: 700;
+		color: black;
+	}
+	#page-direct h5 { }
+	#page-direct table {
+		border-collapse: collapse;
+		background-image: url("../img/table-direct.png");
+		background-size: 280px 280px;
+		width: 280px;
+		height: 280px;
+	}
+	#page-direct table tr { }
+	#page-direct table tr td {
+		min-width: calc(280px/3);
+		max-width: calc(280px/3);
+		line-height: calc(280px/3);
+		min-height: calc(280px/3);
+		max-height: calc(280px/3);
+		border: none;
+		font-weight: 700;
+		color: black;
+		font-size: 12px;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	#page-direct table tr:nth-child(1) td:nth-child(2) {
+		padding-right: 2px;
+	}
+	
+	#page-direct table tr:nth-child(3) td:nth-child(1) {
+		padding-right: 20px;
+	}
+	#page-direct table tr:nth-child(3) td:nth-child(2) {
+		padding-right: 0px;
+	}
+
+#page-multi { }
+
+	#page-multi .container { }
+	
+	#page-multi h3,
+	#page-multi h5 { }
+	#page-multi table {
+		border-collapse: collapse;
+		background-image: url("../img/table-multi.png");
+		background-size: 280px 280px;
+		width: 280px;
+		height: 280px;
+	}
+	#page-multi table tr { }
+	#page-multi table tr td {
+		min-width: calc(280px/7);
+		max-width: calc(280px/7);
+		line-height: calc(280px/7);
+		min-height: calc(280px/7);
+		max-height: calc(280px/7);
+		border: none;
+		font-weight: 700;
+		color: black;
+		font-size: 12px;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	#page-multi table tr:nth-child(7) td:nth-child(1) {
+		padding-left: 8px;
+	}
+	#page-multi table tr:nth-child(5) td {padding-top: 3px}
+	#page-multi table tr:nth-child(7) td {line-height: 36px !important}
