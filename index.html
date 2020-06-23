@@ -5,78 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/bundle.css">
+<link rel="stylesheet" href="css/jquery.toast.min.css">
+<link rel="stylesheet" href="fonts/fonts.min.css">
 <script src="js/jquery.min.js"></script>
 </head>
 <body>
 <div id="page-landing">
-	<div class="container centered">
-		<img class="landing-logo" src="img/logo.png">
-		<img class="landing-header" src="img/header.png">
-		<div class="form hide" id="regDiv">
-			<h3>your referrer:</h3>
-			<input id="inpReferrer" type="text" value="..." readonly>
-		</div>
-		<button id="btnConnect">connect wallet</button>
-		<button id="btnReg">Register (0.04 ETH)</button>
-		<button id="btnHow">Install Wallet Apps</button>
-		<div id="faqButton">
-			<img src="img/arrow.png">
-			WHAT IS SUMMIT?
-		</div>
-	</div>
+    <div class="container centered">
+        <img class="landing-logo" src="img/logo.png">
+        <img class="landing-header" src="img/header.png">
+        <div class="form hide" id="regDiv">
+            <h3>your referrer:</h3>
+            <input id="inpReferrer" type="text" value="..." readonly>
+        </div>
+        <button id="btnConnect">connect wallet</button>
+        <button id="btnReg">Register (0.04 ETH)</button>
+        <button id="btnHow">Install Wallet Apps</button>
+        <div id="faqButton">
+            <img src="img/arrow.png">
+            WHAT IS SUMMIT?
+        </div>
+    </div>
 </div>
 <div id="page-faq">
-	<div class="container">
-		<div id="faqButtonClose" class="centered">
-			CONNECT WALLET
-			<img src="img/arrow.png">
-		</div>
-	</div>
+    <div class="container">
+        <div id="faqButtonClose" class="centered">
+            CONNECT WALLET
+            <img src="img/arrow.png">
+        </div>
+    </div>
 </div>
 <div id="page-account">
-	<div class="container">
-		<div class="form">
-			<h3>your invite url:</h3>
-			<input id="inpInviteUrl" type="text" value="...">
-			<button id="btnCopyInvite">copy</button>
-		</div>
-		<div class="form">
-			<h3>your referrer:</h3>
-			<input id="inpReferrer2" type="text" value="..." readonly>
-		</div>
-		<div class="form">
-			<h3>total matrix earnings:</h3>
-			<input id="inpMatrixEarnings" type="text" value="..." readonly>
-		</div>
-		<div class="form">
-			<h3>Available Shares:</h3>
-			<input id="inpShareAmount" type="text" value="..." readonly>
-			<button class="blockBtn" id="btnWithdraw">withdraw</button>
-		</div>
-		<div class="centered">
-			<button id="btnLogout">log out</button>
-		</div>
-	</div>
-</div>
-<div id="page-direct">
-	<div class="container centered">
-	</div>
-</div>
-<div id="page-multi">
-	<div class="container centered">
-		
-	</div>
-</div>
-<div id="page-header">
-	<div class="container">
-		<button id="btnDirectPage">DIRECT</button><button id="btnMultiPage">MULTI</button><button id="btnAccountPage">ACCOUNT</button>
-	</div>
+
+    <div class="container">
+        <div class="info">
+            <button id="btnLogout">log out</button>
+            <h3>your id number:</h3>
+            <input id="inpUserId" type="text" value="..." readonly><br>
+            <h3>your referrer:</h3>
+            <input id="inpReferrer2" type="text" value="..." readonly><br>
+            <h3>your wallet address:</h3>
+            <input id="inpUserAddress" type="text" value="..." readonly>
+        </div>
+        <div class="hero">
+            <h3>your matrix earnings</h3><sup>$</sup>
+            <input id="inpMatrixEarnings" type="text" value="" readonly>
+            <input id="inpMatrixEarnings_ETH" type="text" value="fetching data..." readonly>
+        </div>
+        <hr style="border-color: #121212; margin: 24px 16px 16px 16px;">
+        <div class="form">
+            <h3>your invite url:</h3>
+            <input id="inpInviteUrl" type="text" value="..." readonly>
+            <button id="btnCopyInvite">copy</button>
+        </div>
+        <div class="form">
+            <h3>Available Shares:</h3>
+            <input id="inpShareAmount" type="text" value="..." readonly>
+            <button class="blockBtn" id="btnWithdraw">withdraw</button>
+        </div>
+    </div>
+    
+    
+    <div id="page-header">
+        <div class="container">
+            <button id="btnDirectPage">DIRECT</button><button id="btnMultiPage">MULTI</button><!--button id="btnAccountPage">ACCOUNT</button-->
+        </div>
+    </div>
+    
+    <div id="page-matrix">
+        <div id="page-direct">
+            <div class="container centered">
+            </div>
+        </div>    
+        <div id="page-multi">
+            <div class="container centered">
+                
+            </div>
+        </div>
+    </div>
+    
 </div>
 <div id="loader">
-	<img src="img/loader-wait.png">
+    <img src="img/loader-wait.png">
 </div>
 <script src="js/web3.min.js"></script>
 <script src="js/js.cookie.min.js"></script>
+<script src="js/jquery.toast.min.js"></script>
 <script src="js/bignumber.min.js"></script>
 <script src="js/summit.abi.js"></script>
 <script src="js/summit.js"></script>

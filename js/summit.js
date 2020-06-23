@@ -4,10 +4,10 @@ $(function () {
 		return (_in * 1000000000);
 	}
 	
-	var currentPage = 3;
+	var currentPage = 1;
 	
 	var hideAllPages = function() {
-		$("#page-landing, #page-faq, #page-account, #page-direct, #page-multi, #page-header, #loader").hide();
+		$("#page-landing, #page-faq, #page-account, #page-direct, #page-multi, #loader").hide();
 	};
 	
 	var toggleLoader = function(s) {
@@ -27,25 +27,25 @@ $(function () {
 	};
 	
 	var showAccountPage = function() {
+		hideAllPages();
 		switch(currentPage) {
 			case 1: showDirectPage();
 			break;
 			case 2: showMultiPage();
 			break;
 		}
-		hideAllPages();
 		$("#page-header, #page-account").show();
 	};
 	
 	var showDirectPage = function() {
-		hideAllPages();
+		$("#page-multi").hide();
 		$("#page-header, #page-direct").show();
 		
 		currentPage = 1;
 	};
 	
 	var showMultiPage = function() {
-		hideAllPages();
+		$("#page-direct").hide();
 		$("#page-header, #page-multi").show();
 		
 		currentPage = 2;
@@ -136,10 +136,12 @@ $(function () {
 		p = p * 2;
 		t = $("<div id='direct_level" + (i+1) + "' class='disabled'></div>");
 		u = $("<div id='multi_level" + (i+1) + "' class='disabled'></div>");
-		t.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='direct_level" + (i+1) + "_earned'>-</span></h5>");
-		u.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='multi_level" + (i+1) + "_earned'>-</span></h5>");
-		t.append("<table><tr><td>&nbsp;</td><td><span id='direct_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span id='direct_idOfLevel" + (i+1) +"_1'>&mdash;</span></td><td><span id='direct_idOfLevel" + (i+1) +"_2'>&mdash;</span></td><td>&nbsp;</td></tr></table><span id='direct_level" + (i+1) + "_buy' class='hide'><button id='directBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
-		u.append("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_2'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td><span id='multi_idOfLevel" + (i+1) +"_2_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_2'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_3'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr></table><span id='multi_level" + (i+1) + "_buy' class='hide'><button id='multiBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
+		//t.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='direct_level" + (i+1) + "_earned'>-</span></h5>");
+		//u.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='multi_level" + (i+1) + "_earned'>-</span></h5>");
+		//t.append("<table><tr><td>&nbsp;</td><td><span id='direct_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span id='direct_idOfLevel" + (i+1) +"_1'>&mdash;</span></td><td><span id='direct_idOfLevel" + (i+1) +"_2'>&mdash;</span></td><td>&nbsp;</td></tr></table><span id='direct_level" + (i+1) + "_buy' class='hide'><button id='directBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
+		t.append("<table><tr><td colspan=2>UP: <span id='direct_level" + (i+1) + "_referrer'>&mdash;</span></td><td colspan=2>&nbsp;</td></tr><tr><td colspan=2><h3>LEVEL " + (i+1) + "</h3></td><td colspan=2>&nbsp;</td></tr><tr><td colspan=3><h5>ETH earned: <span id='direct_level" + (i+1) + "_earned'>-</span></h5></td><td>&nbsp;</td></tr><tr><td colspan=2>ID-<span id='direct_idOfLevel" + (i+1) +"_1'>&mdash;</span></td><td colspan=2>ID-<span id='direct_idOfLevel" + (i+1) +"_2'>&mdash;</span></td></tr></table><span id='direct_level" + (i+1) + "_buy' class='hide'><button id='directBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><hr>");
+		//u.append("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_2'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td><span id='multi_idOfLevel" + (i+1) +"_2_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_2'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_3'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr></table><span id='multi_level" + (i+1) + "_buy' class='hide'><button id='multiBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
+		u.append("<table><tr><td>UP: <span id='multi_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td></tr><tr><td><h3>LEVEL " + (i+1) + "</h3></td><td>&nbsp;</td></tr><tr><td><h5>ETH earned: <span id='direct_level" + (i+1) + "_earned'>-</span></h5></td><td>&nbsp;</td></tr> <tr><td>ID-<span id='multi_idOfLevel" + (i+1) +"_1_1'>&mdash;</span></td><td>ID-<span id='multi_idOfLevel" + (i+1) +"_1_2'>&mdash;</span></td></tr> <tr><td>ID-<span id='multi_idOfLevel" + (i+1) +"_2_1'>&mdash;</span></td><td>ID-<span id='multi_idOfLevel" + (i+1) +"_2_3'>&mdash;</span></td></tr><tr><td>ID-<span id='multi_idOfLevel" + (i+1) +"_2_2'>&mdash;</span></td><td>&nbsp;</td></tr></table><span id='multi_level" + (i+1) + "_buy' class='hide'><button id='multiBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><hr>");
 		$direct.append(t);
 		$multi.append(u);
 	}
@@ -158,7 +160,7 @@ $(function () {
 	var summitServer = (useLocal) ? "ws://127.0.0.1:8545" : "wss://ropsten.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	// var summitServer = "wss://mainnet.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	
-	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xa0B13C4EDcA95aDcE03627f52a2Af6012CA6068F";
+	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xa591595E755Aa6ddc8A8D924419a64df1347992f";
 	// var ethContractAddr = "";
 	
 	var defAcc = "0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f";
@@ -338,11 +340,11 @@ $(function () {
 
 	function getSummitStats() {
 		
-		summitEthContract.methods.lastUserId().call(function(_err, _result){
+		/*summitEthContract.methods.lastUserId().call(function(_err, _result){
 			if(!_err){
 				console.log("lastuserid: " + _result);
 			}
-		});
+		})*/;
 		summitEthContract.methods.totalShares().call(function(_err, _result){
 			if(!_err){
 				let _totalEth = new BigNumber(_result);
@@ -355,8 +357,8 @@ $(function () {
 				
 			}
 		});
-        summitEthContract.methods.users("0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f").call(function(e, res) { console.log(res) });
-        summitEthContract.methods.serverShares().call(function(e, res) { console.log(res) });
+        //summitEthContract.methods.users("0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f").call(function(e, res) { console.log(res) });
+        //summitEthContract.methods.serverShares().call(function(e, res) { console.log(res) });
 
 		setTimeout(function(){ getSummitStats();}, 15000);
 	}
@@ -371,7 +373,7 @@ $(function () {
 
 		web3Provider = new Web3(window.web3.currentProvider);
 
-		checkNetwork(startGame);
+		checkNetwork(startSystem);
 	}
 
 
@@ -433,7 +435,7 @@ $(function () {
 	  });
 	}
 
-	function startGame() {
+	function startSystem() {
 		// jQuery.timeago.settings.allowFuture = true;
 
 
@@ -531,6 +533,7 @@ $(function () {
 		  {
 			//showError("Unable to open your Ethereum Wallet - are you logged in to your Wallet?<br/><br/>If this issue continues please contact support.");    
 			canPlay = false;
+            notLoggedInMsg();
 			//deactivateGame();
 		  }
 
@@ -539,6 +542,7 @@ $(function () {
 		  output = "Error";
 		  //showError("Unable to open your Ethereum Wallet - are you logged in to your Wallet?<br/><br/>If this issue continues please contact support.");
 		  //deactivateGame();
+          notLoggedInMsg();
 		  canPlay = false;
 		}
 		
@@ -560,7 +564,9 @@ $(function () {
 				} else {
 					let _btc = totalEarnings.div(TOKEN_DECIMALS).div(new BigNumber(exchange_btc_eth));
 					let _usd = _btc.times(exchange_btc_usd);
-					$('#inpMatrixEarnings').val(totalEarnings.div(TOKEN_DECIMALS).toFixed(8) + " ETH ($" + _usd.toFixed(2) + ")");
+					//$('#inpMatrixEarnings').val(totalEarnings.div(TOKEN_DECIMALS).toFixed(8) + " ETH ($" + _usd.toFixed(2) + ")");
+					$('#inpMatrixEarnings').val(_usd.toFixed(2));
+					$('#inpMatrixEarnings_ETH').val(totalEarnings.div(TOKEN_DECIMALS).toFixed(8) + " ETH");
 				}
 			}
 			
@@ -610,7 +616,7 @@ $(function () {
 
 					if(_results[2] == true) {
 						$('#direct_level' + level).addClass('disabled');
-						toastMessage("Level " + level + " is blocked for further friend payments until you upgrade to the next level!", "Upgrade needed", 30000);
+						toastMessage("Level " + level + " is blocked for invites until you unlock the next level!", "Upgrade needed", 30000);
 					}
 					for(let c=0; c< _results[1].length; c++) {
 						ethContract.methods.users(_results[1][c]).call(function(_err, _result){
@@ -642,6 +648,7 @@ $(function () {
 					$('#direct_level' + c).removeClass('disabled');
 					$('#direct_level' + c).addClass('disabled');
 					$('#direct_level' + c).addClass('hide');
+                    //$('#direct_level' + c + '_buy').removeClass('hide');
 				}
 				populateMultiLevels(1);
 			}
@@ -677,7 +684,7 @@ $(function () {
 
 					if(_results[3] == true) {
 						$('#multi_level' + level).addClass('disabled');
-						toastMessage("Level " + level + " is blocked for further friend payments until you upgrade to the next level!", "Upgrade needed", 30000);
+						toastMessage("Level " + level + " is blocked for invites until you unlock the next level!", "Upgrade needed", 30000);
 					}
 					for(let c=0; c< _results[1].length; c++) {
 						// sub level 1
@@ -718,6 +725,7 @@ $(function () {
 					$('#multi_level' + c).removeClass('hide');
 					$('#multi_level' + c).addClass('disabled');
 					$('#multi_level' + c).addClass('hide');
+                    //$('#multi_level' + c + '_buy').removeClass('hide');
 				}
 			}
 		});
@@ -730,7 +738,7 @@ $(function () {
 	}
 
 	function openGuide() {
-	  var win = window.open("https://ethmatrix.network/ETHMatrix.pdf", '_blank');
+	  var win = window.open("https://SummitETH.network/SummitETH.pdf", '_blank');
 	  win.focus();		
 	}
 
@@ -789,7 +797,7 @@ $(function () {
 		ethContract.methods.claimShares().estimateGas({from: usrWalletAddress}, function(_err, _gasAmount){
 			if(_err){
 				console.log(_err);
-				toastMessage("An error occured sending your transaction - please ensure you have enough gas and try again", "Error with transaction", 15000);
+				toastMessage("An error occured sending your transaction - please ensure you have enough gas and try again", "Tx Failed", 15000);
 				return;
 			} else {
 				showLoader("wait");
@@ -800,12 +808,12 @@ $(function () {
 							
 							if(_err){
 								hideLoader();
-								toastMessage("An error occured sending your transaction - please ensure you have enough gas and try again", "Error with transaction", 15000);
+								toastMessage("An error occured with the transaction.", "Tx Failed", 15000);
 								return;	
 							} else {
 								hideLoader();
 								$('#inpShareAmount').val("0.00000000 ETH");
-								toastMessage("Dividends are being processed by the blockchain and will be in your wallet shortly!", "Withdrawing Dividends", 30000);
+								toastMessage("Shares will be sent to your wallet shortly!", "Withdrawing Shares", 30000);
 
 							}
 					});
@@ -854,6 +862,7 @@ $(function () {
 									return;	
 								} else {
 									//toastMessage("You're in the game! Now start shareing your REF URL to fill up your MATRIX!", "Registration compelte", 15000);
+                                    toastMessage("Registration complete!");
 									userChecks = 0;
 									checkUserComplete();
 								}
@@ -888,6 +897,7 @@ $(function () {
 								return;	
 							} else {
 								//toastMessage("You're in the game! Now start shareing your REF URL to fill up your MATRIX!", "Registration compelte", 15000);
+                                toastMessage("Level successfully unlocked!");
 								buyChecks = 0;
 								levelChecking = level;
 								matrixChecking = matrix;
@@ -942,11 +952,11 @@ $(function () {
 				// complete
 				setTimeout(function(){ showUser(_result); setupUser(); hideLoader();}, 1500);
 			} else {
-				//if(userChecks < 500) {
+				if(userChecks < 500) {
 					setTimeout(function(){ userChecks++; checkUserComplete();}, 1500);
-				//} else {
-				//	toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaction", 15000);
-				//}
+				} else {
+					toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaction", 15000);
+				}
 			}
 		});
 	}
@@ -965,6 +975,8 @@ $(function () {
 		//	$('#inpReferrer2').val(_UserObj.referrer.substring(0,20) + "...");
 		//else
 		$('#inpReferrer2').val(_UserObj.referrer);
+        $("#inpUserId").val(_UserObj.id);
+        $("#inpUserAddress").val(usrWalletAddress);
 		//$('#totalFriends').html(_UserObj.friendsCount);
 		sharesClaimed = new BigNumber(_UserObj.sharesClaimed);
 		getShares();
@@ -1205,7 +1217,7 @@ $(function () {
 	
 	
 	function openGuide() {
-	  var win = window.open("/ETHMatrix.pdf", '_blank');
+	  var win = window.open("/SummitETH.pdf", '_blank');
 	  win.focus();		
 	}
 
@@ -1226,7 +1238,7 @@ $(function () {
 			if(hasWeb3Wallet){
 				onClickConnect();
 			} else {
-				toastMessage("You must have a Web3 wallet installed and logged in to connect to ETHMatrix");
+				toastMessage("Ethereum wallet not detected!");
 			}
 		});
 
@@ -1297,35 +1309,31 @@ $(function () {
 
 
 	function notLoggedInMsg() {
-			showError("Unable to open your Ethereum Wallet, you need to have a Web3 wallet such as MetaMask installed and unlocked/logged in.<br/><br/>If this issue continues please contact support.");    
+        // showError("Unable to open your Ethereum Wallet, you need to have a Web3 wallet such as MetaMask installed and unlocked/logged in.<br/><br/>If this issue continues please contact support.");    
+        toastMessage("Cannot access Ethereum wallet.", "Error");
 	}
 
 	function showError(_msg) {
-		$('#errorMsg').html(_msg);
-		$('#errorPanel').foundation('open');
+		//$('#errorMsg').html(_msg);
+		//$('#errorPanel').foundation('open');
 	}
 
 
 	function toastMessage(_msg, _header, _timeout) {
-		console.log("TOAST: " + _msg);
-		/*$.toast({
-			text: _msg, // Text that is to be shown in the toast
-			heading: _header|| 'ETHMatrix', // Optional heading to be shown on the toast
-			showHideTransition: 'fade', // fade, slide or plain
-			allowToastClose: true, // Boolean value true or false
-			hideAfter: _timeout||6000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-			stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-			position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-			bgColor: '#ff3cbe',  // Background color of the toast
-			textColor: '#eeeeee',  // Text color of the toast
-			textAlign: 'left',  // Text alignment i.e. left, right or center
-			loader: true,  // Whether to show loader or not. True by default
-			loaderBg: '#9EC600',  // Background color of the toast loader
-			beforeShow: function () {}, // will be triggered before the toast is shown
-			afterShown: function () {}, // will be triggered after the toat has been shown
-			beforeHide: function () {}, // will be triggered before the toast gets hidden
-			afterHidden: function () {}  // will be triggered after the toast has been hidden
-		});*/
+        $.toast({
+            text: _msg,
+            heading: _header || "Summit ETH", // Optional heading to be shown on the toast
+            showHideTransition: 'slide', // fade, slide or plain
+            allowToastClose: true, // Boolean value true or false
+            hideAfter: _timeout || 4000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+            stack: 3, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+            position: 'top-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+            bgColor: '#121212',  // Background color of the toast
+            textColor: '#ffffff',  // Text color of the toast
+            textAlign: 'center',  // Text alignment i.e. left, right or center
+            loader: false,  // Whether to show loader or not. True by default
+            loaderBg: '#9EC600',  // Background color of the toast loader
+        });
 	}
 
 	function copy(element) {
