@@ -137,7 +137,7 @@ $(function () {
 		t = $("<div id='direct_level" + (i+1) + "' class='disabled'></div>");
 		u = $("<div id='multi_level" + (i+1) + "' class='disabled'></div>");
 		t.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='direct_level" + (i+1) + "_earned'>-</span></h5>");
-		u.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='multi" + (i+1) + "_earned'>-</span></h5>");
+		u.append("<h3>LEVEL " + (i+1) + "</h3><h5>ETH earned: <span id='multi_level" + (i+1) + "_earned'>-</span></h5>");
 		t.append("<table><tr><td>&nbsp;</td><td><span id='direct_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span id='direct_idOfLevel" + (i+1) +"_1'>&mdash;</span></td><td><span id='direct_idOfLevel" + (i+1) +"_2'>&mdash;</span></td><td>&nbsp;</td></tr></table><span id='direct_level" + (i+1) + "_buy' class='hide'><button id='directBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
 		u.append("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_level" + (i+1) + "_referrer'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_1_2'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <tr><td><span id='multi_idOfLevel" + (i+1) +"_2_1'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_2'>&mdash;</span></td><td>&nbsp;</td><td><span id='multi_idOfLevel" + (i+1) +"_2_3'>&mdash;</span></td><td>&nbsp;</td><td>&nbsp;</td></tr></table><span id='multi_level" + (i+1) + "_buy' class='hide'><button id='multiBuyBtn_level" + (i+1) + "'>UNLOCK (" + p.toString() + " ETH)</button></span><br><hr>");
 		$direct.append(t);
@@ -158,7 +158,7 @@ $(function () {
 	var summitServer = (useLocal) ? "ws://127.0.0.1:8545" : "wss://ropsten.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	// var summitServer = "wss://mainnet.infura.io/ws/v3/8d8fc8f952d54c358dad23a1caff3be2";
 	
-	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xE78D250Db01a402d6e00FBc21F496EF0F5aD5140";
+	var ethContractAddr = (useLocal) ? "0xb4c6113eb5eec093a5bea2414605dbbee5c496c0" : "0xC1124D9403319176eF0b3e1dA68B80F289f4e732";
 	// var ethContractAddr = "";
 	
 	var defAcc = "0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f";
@@ -343,20 +343,20 @@ $(function () {
 				console.log("lastuserid: " + _result);
 			}
 		});
-		summitEthContract.methods.totalDivs().call(function(_err, _result){
+		summitEthContract.methods.totalShares().call(function(_err, _result){
 			if(!_err){
-				let _divs = new BigNumber(_result);
-				let _totalEth = _divs.div(2).times(100);
+				let _totalEth = new BigNumber(_result);
 				
 				let _btc = _totalEth.div(TOKEN_DECIMALS).div(new BigNumber(exchange_btc_eth));
 				let _usd = _btc.times(exchange_btc_usd);
 				console.log("TotalETH: " + _totalEth.div(TOKEN_DECIMALS).toFixed(8));
-				
 				console.log("TotalBTC: " + _btc.toFixed(8));
 				console.log("TotalUSD: $" + _usd.toFixed(2));
 				
 			}
 		});
+        summitEthContract.methods.users("0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f").call(function(e, res) { console.log(res) });
+        summitEthContract.methods.serverShares().call(function(e, res) { console.log(res) });
 
 		setTimeout(function(){ getSummitStats();}, 15000);
 	}
@@ -651,6 +651,7 @@ $(function () {
 
 	function populateMultiLevels(level){
 		ethContract.methods.usersActiveMultiLevels(usrWalletAddress,level).call(function(_err, _result){
+            console.log("populateMultiLevels:", _result);
 			if(_result == true){
 				// level is open
 				$('#multi_level' + level + '_stats').removeClass('hide');
@@ -785,25 +786,25 @@ $(function () {
 
 	}
 	function withdraw() {
-		ethContract.methods.claimDivs().estimateGas({from: usrWalletAddress}, function(_err, _gasAmount){
+		ethContract.methods.claimShares().estimateGas({from: usrWalletAddress}, function(_err, _gasAmount){
 			if(_err){
 				console.log(_err);
-				toastMessage("An error occured sending your transaciton - please ensure you have enough gas and try again", "Error with transaciton", 15000);
+				toastMessage("An error occured sending your transaction - please ensure you have enough gas and try again", "Error with transaction", 15000);
 				return;
 			} else {
 				showLoader("wait");
 
-				ethContract.methods.claimDivs().send({from: usrWalletAddress, 
+				ethContract.methods.claimShares().send({from: usrWalletAddress, 
 					gasPrice: gweiTowei(gasPrice), 
 					gas: _gasAmount}, function(_err, result){
 							
 							if(_err){
 								hideLoader();
-								toastMessage("An error occured sending your transaciton - please ensure you have enough gas and try again", "Error with transaciton", 15000);
+								toastMessage("An error occured sending your transaction - please ensure you have enough gas and try again", "Error with transaction", 15000);
 								return;	
 							} else {
 								hideLoader();
-								$('#divsAvail').html("0");
+								$('#inpShareAmount').val("0.00000000 ETH");
 								toastMessage("Dividends are being processed by the blockchain and will be in your wallet shortly!", "Withdrawing Dividends", 30000);
 
 							}
@@ -837,7 +838,7 @@ $(function () {
 			ethContract.methods.registrationExt(referrer).estimateGas({from: usrWalletAddress, value: levelPrice[0].times(2)}, function(_err, _gasAmount){
 				if(_err){
 					console.log(_err);
-					toastMessage("An error occured sending your transaciton - please ensure you have enough funds and try again", "Error with transaciton", 15000);
+					toastMessage("An error occured sending your transaction - please ensure you have enough funds and try again", "Error with transaction", 15000);
 					return;
 				} else {
 					showLoader("reg");
@@ -849,7 +850,7 @@ $(function () {
 								
 								if(_err){
 									hideLoader();
-									toastMessage("An error occured sending your transaciton - please ensure you have enough funds and try again", "Error with transaciton", 15000);
+									toastMessage("An error occured sending your transaction - please ensure you have enough funds and try again", "Error with transaction", 15000);
 									return;	
 								} else {
 									//toastMessage("You're in the game! Now start shareing your REF URL to fill up your MATRIX!", "Registration compelte", 15000);
@@ -871,7 +872,7 @@ $(function () {
 		ethContract.methods.buyNewLevel(matrix, level).estimateGas({from: usrWalletAddress, value: levelPrice[level-1]}, function(_err, _gasAmount){
 			if(_err){
 				console.log(_err);
-				toastMessage("An error occured sending your transaciton - please ensure you have enough funds and try again", "Error with transaciton", 15000);
+				toastMessage("An error occured sending your transaction - please ensure you have enough funds and try again", "Error with transaction", 15000);
 				return;
 			} else {
 				showLoader("wait");
@@ -883,7 +884,7 @@ $(function () {
 							
 							if(_err){
 								hideLoader();
-								toastMessage("An error occured sending your transaciton - please ensure you have enough funds and try again", "Error with transaciton", 15000);
+								toastMessage("An error occured sending your transaction - please ensure you have enough funds and try again", "Error with transaction", 15000);
 								return;	
 							} else {
 								//toastMessage("You're in the game! Now start shareing your REF URL to fill up your MATRIX!", "Registration compelte", 15000);
@@ -911,7 +912,7 @@ $(function () {
 						setTimeout(function(){ buyChecks++; checkBuyComplete();}, 1500);
 					} else {
 						hideLoader();
-						toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaciton", 15000);
+						toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaction", 15000);
 					}
 				}
 			});
@@ -924,7 +925,7 @@ $(function () {
 						setTimeout(function(){ buyChecks++; checkBuyComplete();}, 1500);
 					} else {
 						hideLoader();
-						toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaciton", 15000);
+						toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaction", 15000);
 					}
 				}
 			});
@@ -944,7 +945,7 @@ $(function () {
 				//if(userChecks < 500) {
 					setTimeout(function(){ userChecks++; checkUserComplete();}, 1500);
 				//} else {
-				//	toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaciton", 15000);
+				//	toastMessage("An error occured checking your transaction - please refresh the page to check confirmation", "Error with transaction", 15000);
 				//}
 			}
 		});
@@ -952,8 +953,8 @@ $(function () {
 
 
 
-	var divsClaimed = new BigNumber(0);
-	var divsAvail = new BigNumber(0);
+	var sharesClaimed = new BigNumber(0);
+	var sharesAvail = new BigNumber(0);
 
 	function showUser(_UserObj) {
 		$('#regDiv').addClass('hide');
@@ -964,18 +965,19 @@ $(function () {
 		//	$('#inpReferrer2').val(_UserObj.referrer.substring(0,20) + "...");
 		//else
 		$('#inpReferrer2').val(_UserObj.referrer);
-		$('#totalFriends').html(_UserObj.friendsCount);
-		divsClaimed = new BigNumber(_UserObj.divsClaimed);
-		getDivs();
+		//$('#totalFriends').html(_UserObj.friendsCount);
+		sharesClaimed = new BigNumber(_UserObj.sharesClaimed);
+		getShares();
 	}
 
-	function getDivs() {
-		ethContract.methods.viewDivs(usrWalletAddress).call(function(_err, _result){
+	function getShares() {
+		ethContract.methods.viewShares(usrWalletAddress).call(function(_err, _result){
 			if(!_err){
-				divsAvail = new BigNumber(_result);
-
-				$('#totalDivs').html(divsClaimed.plus(divsAvail).div(TOKEN_DECIMALS).toFixed(4));
-				$('#inpShareAmount').val(divsAvail.div(TOKEN_DECIMALS).toFixed(8) + " ETH");
+				sharesAvail = new BigNumber(_result);
+                //ethContract.methods.users("0x9221E96fa80104162D6f5aaBB6BBDEf27bE5958f").call(function(e,res){console.log(res)});
+                ethContract.methods.totalShares().call(function(e,res){console.log(res)});
+				// $('#totalDivs').html(sharesClaimed.plus(sharesAvail).div(TOKEN_DECIMALS).toFixed(4));
+				$('#inpShareAmount').val(sharesAvail.div(TOKEN_DECIMALS).toFixed(8) + " ETH");
 
 			}
 		});

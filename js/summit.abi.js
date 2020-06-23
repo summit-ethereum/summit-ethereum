@@ -1,33 +1,5 @@
 var summitAbi = {"abi": [
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "claimDivs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "totalDividendPoints",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [],
 		"name": "LAST_LEVEL",
@@ -64,6 +36,20 @@ var summitAbi = {"abi": [
 		"constant": true,
 		"inputs": [],
 		"name": "lastUserId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalShares",
 		"outputs": [
 			{
 				"name": "",
@@ -194,22 +180,17 @@ var summitAbi = {"abi": [
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-		],
-		"name": "viewDivs",
+		"constant": false,
+		"inputs": [],
+		"name": "claimShares",
 		"outputs": [
 			{
-				"name": "divsAvailable",
-				"type": "uint256"
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -229,11 +210,11 @@ var summitAbi = {"abi": [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "totalDivs",
+		"name": "owner",
 		"outputs": [
 			{
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -243,11 +224,11 @@ var summitAbi = {"abi": [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "owner",
+		"name": "serverShares",
 		"outputs": [
 			{
 				"name": "",
-				"type": "address"
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -283,24 +264,12 @@ var summitAbi = {"abi": [
 				"type": "uint256"
 			},
 			{
+				"name": "sharesAmountMark",
+				"type": "uint256"
+			},
+			{
 				"name": "referrer",
 				"type": "address"
-			},
-			{
-				"name": "friendsCount",
-				"type": "uint256"
-			},
-			{
-				"name": "divClaimMark",
-				"type": "uint256"
-			},
-			{
-				"name": "totalPlayerDivPoints",
-				"type": "uint256"
-			},
-			{
-				"name": "divsClaimed",
-				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -428,14 +397,14 @@ var summitAbi = {"abi": [
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_player",
+				"name": "_user",
 				"type": "address"
 			}
 		],
-		"name": "viewDivsPercent",
+		"name": "viewShares",
 		"outputs": [
 			{
-				"name": "divsPercent",
+				"name": "sharesAvailable",
 				"type": "uint256"
 			}
 		],
@@ -467,20 +436,6 @@ var summitAbi = {"abi": [
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "divPot",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"name": "ownerAddress",
@@ -495,177 +450,5 @@ var summitAbi = {"abi": [
 		"payable": true,
 		"stateMutability": "payable",
 		"type": "fallback"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "referrer",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "userId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "referrerId",
-				"type": "uint256"
-			}
-		],
-		"name": "Registration",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "currentReferrer",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "caller",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "matrix",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "lvl",
-				"type": "uint8"
-			}
-		],
-		"name": "Reinvest",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "referrer",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "matrix",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "lvl",
-				"type": "uint8"
-			}
-		],
-		"name": "Upgrade",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "referrer",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "matrix",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "lvl",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "place",
-				"type": "uint8"
-			}
-		],
-		"name": "NewUserPlace",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "receiver",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "matrix",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "lvl",
-				"type": "uint8"
-			}
-		],
-		"name": "MissedEthReceive",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "receiver",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "matrix",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "lvl",
-				"type": "uint8"
-			}
-		],
-		"name": "SentExtraEthDividends",
-		"type": "event"
 	}
 ]};
