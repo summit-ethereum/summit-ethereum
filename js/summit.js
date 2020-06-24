@@ -99,11 +99,11 @@ $(function () {
 			top.location.href = top.location.origin + top.location.pathname;
 		}, 1500);
 	});
-	$("#btnViewFaq").on("click", function(e) {
+	$("#btnViewFaq, #btnViewFaqs").on("click", function(e) {
 		$("#page-faq").show().css({top: 0});
 	});
 	
-	$("#faqButtonClose").on("click", function(e) {
+	$("#faqButtonClose, #btnJoinNow").on("click", function(e) {
 		$("#page-faq").css({top: "100%"});
 		setTimeout(function() {$("#page-faq").hide()},1000);
 	});
