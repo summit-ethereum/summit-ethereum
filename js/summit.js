@@ -83,8 +83,7 @@ $(function () {
 	//showAccountPage();
 	//showDirectPage();
 	//showMultiPage();
-	
-	// check web3 availability
+    //$("#page-faq").show().css({top: 0});
 	
 	
 	
@@ -100,7 +99,7 @@ $(function () {
 			top.location.href = top.location.origin + top.location.pathname;
 		}, 1500);
 	});
-	$("#faqButton").on("click", function(e) {
+	$("#btnViewFaq").on("click", function(e) {
 		$("#page-faq").show().css({top: 0});
 	});
 	
